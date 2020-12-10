@@ -11,12 +11,16 @@ import 'views/user/login.dart';
 import 'views/user/login_pw.dart';
 import 'views/user/found_pw.dart';
 import 'views/mine/mineInfo.dart';
-
+import 'common/global.dart';
+import 'views/mine/editInfo/editPhone.dart';
+import 'views/mine/editInfo/case.dart';
+import 'views/mine/editInfo/uploadCase.dart';
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: G.navigatorKey,
       title: '样衣路由',
       theme: ThemeData(
           primaryColor: Colors.white,
@@ -33,7 +37,10 @@ class MyApp extends StatelessWidget {
         Mine.routeName:(ctx) => Mine(),
         MineInfo.routeName:(ctx)=>MineInfo(),
         Address.routeName:(ctx) => Address(),
-        EditAddress.routeName:(ctx) => EditAddress()
+        EditAddress.routeName:(ctx) => EditAddress(),
+        EditPhone.routeName:(BuildContext context, { Object args }) => EditPhone(),
+        Case.routeName:(BuildContext context, { Object args }) => Case(),
+        UploadCase.routeName:(BuildContext context, { Object args }) => UploadCase(),
       },
     );
   }

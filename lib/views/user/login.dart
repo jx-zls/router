@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'login_pw.dart';
 import 'package:router/root.dart';
+import 'package:router/component/dialog/c_dialog.dart';
 
 class Login extends StatefulWidget {
   static const String routeName = "/login";
@@ -129,10 +130,37 @@ class _LoginState extends State<Login> {
                           fontWeight: FontWeight.normal),
                     ),
                     onPressed: () {
-                      Navigator.of(context).pushAndRemoveUntil(
-                          new MaterialPageRoute(
-                              builder: (context) => new Root_V()),
-                          (route) => route == null);
+                      ADialog.confirm(context,
+                            title: '确认弹窗',
+                            content: 'flutter_luckin_coffee是一个完整的flutter实战demo',
+                            confirmButtonPress: () {
+                              Navigator.pop(context);
+                            }
+                          );
+                      // showDialog(
+                      //     context: context,
+                      //     barrierDismissible: false,
+                      //     builder: (ctx) {
+                      //       return AlertDialog(
+                      //         title: Text('Dialog'),
+                      //         content: Text(('Dialog content..')),
+                      //         actions: <Widget>[
+                      //           new FlatButton(
+                      //             child: new Text("取消"),
+                      //             onPressed: () {
+                      //               Navigator.of(context).pop();
+                      //             },
+                      //           ),
+                      //           new FlatButton(
+                      //             child: new Text("确定"),
+                      //             onPressed: () {
+                      //               Navigator.of(context).pop();
+                      //             },
+                      //           ),
+                      //         ],
+                      //       );
+                      //     });
+                    
                     },
                   ),
                 ),

@@ -4,7 +4,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 class Perferences {
   saveUserData(userInfo) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('userInfo', '1234');
+    print('saveUserData == ${json.encode(userInfo)}');
+    prefs.setString('userInfo', json.encode(userInfo));
   }
 
   getUserData() async {

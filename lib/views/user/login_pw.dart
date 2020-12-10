@@ -16,25 +16,27 @@ class _LoginState extends State<Login_PW> {
   String _password;
   HomeRequest homeRequest = HomeRequest();
 
+  _userLogin(context, formk) {
+  var _state2 = formk.currentState as FormState;
+  if(_state2.validate()){
+    _state2.save();
 
- _userLogin(context){
-  // homeRequest.loginByName('Luke', '123456',(data){
-    // Perferences().saveUserData(data);
-     Navigator.of(context).pushAndRemoveUntil(
-                          new MaterialPageRoute(
-                              builder: (context) => new Root_V()),
-                          (route) => route == null);
-  // },(err){
-  //   print('error $err');
-  // });
-  //  result.then((value) => {
-  //     print('result11111 == $value')
-  //  });
-   
- }
+  homeRequest.loginByName(_name, _password, (data) {
+      Perferences().saveUserData(data);
+      Navigator.of(context).pushAndRemoveUntil(
+          new MaterialPageRoute(builder: (context) => new Root_V()),
+          (route) => route == null);
+    }, (err) {
+      print('error $err');
+    });
+  }else{
+    print('验证失败');
+  }
+  }
 
   @override
   Widget _loginContent(context) {
+    GlobalKey _formKey = new GlobalKey<FormState>();
     return Container(
       color: Color(0xffefefef),
       height: (MediaQuery.of(context).size.height),
@@ -58,19 +60,24 @@ class _LoginState extends State<Login_PW> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(15.0, 15.0, 0.0, 0.0),
                     child: new TextFormField(
-                      maxLines: 1,
-                      keyboardType: TextInputType.emailAddress,
-                      autofocus: false,
-                      style: TextStyle(fontSize: 15),
-                      decoration: new InputDecoration(
-                          border: InputBorder.none,
-                          hintText: '请输入帐号',
-                          icon: new Icon(
-                            Icons.email,
-                            color: Colors.grey,
-                          )),
-                      // onSaved: (value) => _userID = value.trim(),
-                    ),
+                        maxLines: 1,
+                        keyboardType: TextInputType.emailAddress,
+                        autofocus: false,
+                        style: TextStyle(fontSize: 15),
+                        decoration: new InputDecoration(
+                            border: InputBorder.none,
+                            hintText: '请输入帐号',
+                            icon: new Icon(
+                              Icons.email,
+                              color: Colors.grey,
+                            )),
+                        validator: (v) {
+                          return v.trim().length > 0 ? null : "用户名不能为空";
+                        },
+                        onSaved: (value){
+                          _name = value;
+                        },
+                        ),
                   ),
                   Divider(
                     height: 0.5,
@@ -84,19 +91,24 @@ class _LoginState extends State<Login_PW> {
                           padding:
                               const EdgeInsets.fromLTRB(15.0, 15.0, 0.0, 0.0),
                           child: new TextFormField(
-                            maxLines: 1,
-                            keyboardType: TextInputType.number,
-                            autofocus: false,
-                            style: TextStyle(fontSize: 15),
-                            decoration: new InputDecoration(
-                                border: InputBorder.none,
-                                hintText: '请输入密码',
-                                icon: new Icon(
-                                  Icons.lock,
-                                  color: Colors.grey,
-                                )),
-                            // onSaved: (value) => _userID = value.trim(),
-                          ),
+                              maxLines: 1,
+                              keyboardType: TextInputType.number,
+                              autofocus: false,
+                              style: TextStyle(fontSize: 15),
+                              decoration: new InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: '请输入密码',
+                                  icon: new Icon(
+                                    Icons.lock,
+                                    color: Colors.grey,
+                                  )),
+                              validator: (v) {
+                                return v.trim().length > 5 ? null : "密码不能少于6位";
+                              },
+                              onSaved: (value){
+                                _password = value;
+                              },
+                              ),
                         ),
                       ),
                       Container(
@@ -133,7 +145,7 @@ class _LoginState extends State<Login_PW> {
                     fontWeight: FontWeight.normal),
               ),
               onPressed: () {
-                _userLogin(context);
+                _userLogin(context, _formKey);
               },
             ),
           ),
@@ -148,9 +160,8 @@ class _LoginState extends State<Login_PW> {
                       style: TextStyle(
                           fontSize: 12, fontWeight: FontWeight.normal),
                     ),
-                    onPressed: () => {
-                      Navigator.of(context).pushNamed(Found_PW.routeName)
-                    },
+                    onPressed: () =>
+                        {Navigator.of(context).pushNamed(Found_PW.routeName)},
                   ),
                   FlatButton(
                     child: Text(
@@ -170,20 +181,19 @@ class _LoginState extends State<Login_PW> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('登录'),
-        leading: IconButton(
-          icon: Image.asset('assets/home/left_back.png'),
-          onPressed: () {
-            Navigator.of(context).pop("a back detail message");
-          },
+        appBar: AppBar(
+          title: Text('登录'),
+          leading: IconButton(
+            icon: Image.asset('assets/home/left_back.png'),
+            onPressed: () {
+              Navigator.of(context).pop("a back detail message");
+            },
+          ),
         ),
-      ),
-      body:ListView.builder(
-      itemCount: 1,
-      itemBuilder: (context, idx){
-        return _loginContent(context);
-      }) 
-    );
+        body: ListView.builder(
+            itemCount: 1,
+            itemBuilder: (context, idx) {
+              return _loginContent(context);
+            }));
   }
 }
