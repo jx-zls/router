@@ -14,7 +14,6 @@ class Mine extends StatefulWidget {
 }
 
 class _MineState extends State<Mine> {
-  HomeRequest request = HomeRequest();
 
   @override
   void initState() {
@@ -31,7 +30,7 @@ class _MineState extends State<Mine> {
   }
 
   void _getUserInfoData() {
-    request.getUserInfoByUserId(
+    HomeRequest.getUserInfoByUserId(
         (result) => {
               setState(() {
                 model = MineModel.passValue(result["userInfo"]);

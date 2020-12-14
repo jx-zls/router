@@ -32,6 +32,7 @@ dependencies:
   shared_preferences: "^0.4.2"
   flutter_picker: ^1.1.0
   color_dart: ^0.1.0
+  common_utils: ^1.2.1
 
 dev_dependencies:
   flutter_test:
@@ -67,6 +68,7 @@ flutter:
     - assets/mine/message.png
     - assets/mine/small_user.png
     - assets/mine/edit.png
+    - assets/server/s_detail.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

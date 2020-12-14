@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'views/home/home.dart';
 import 'views/order/order.dart';
 import 'views/server/server.dart';
+import 'views/server/serverDetail.dart';
 import 'views/mine/mine.dart';
 import 'root.dart';
 import 'views/mine/address/address.dart';
@@ -15,6 +16,9 @@ import 'common/global.dart';
 import 'views/mine/editInfo/editPhone.dart';
 import 'views/mine/editInfo/case.dart';
 import 'views/mine/editInfo/uploadCase.dart';
+import 'package:router/routes/indes.dart';
+
+final Router router = Router();
 
 class MyApp extends StatelessWidget {
   @override
@@ -27,21 +31,23 @@ class MyApp extends StatelessWidget {
           highlightColor: Colors.transparent,
           splashColor: Colors.transparent),
       home: Login(),
-      initialRoute: '/login',
-      routes: {
-        Login.routeName:(ctx)=>Login(),
-        Login_PW.routeName:(ctx)=>Login_PW(),
-        Found_PW.routeName:(ctx)=>Found_PW(),
+      initialRoute: '/',
+       onGenerateRoute: router.getRoutes,
+      // routes: {
+      //   Login.routeName:(ctx)=>Login(),
+      //   Login_PW.routeName:(ctx)=>Login_PW(),
+      //   Found_PW.routeName:(ctx)=>Found_PW(),
         
-        Root_V.routeName:(ctx)=>Root_V(),
-        Mine.routeName:(ctx) => Mine(),
-        MineInfo.routeName:(ctx)=>MineInfo(),
-        Address.routeName:(ctx) => Address(),
-        EditAddress.routeName:(ctx) => EditAddress(),
-        EditPhone.routeName:(BuildContext context, { Object args }) => EditPhone(),
-        Case.routeName:(BuildContext context, { Object args }) => Case(),
-        UploadCase.routeName:(BuildContext context, { Object args }) => UploadCase(),
-      },
+      //   Root_V.routeName:(ctx)=>Root_V(),
+      //   Mine.routeName:(ctx) => Mine(),
+      //   MineInfo.routeName:(ctx)=>MineInfo(),
+      //   Address.routeName:(ctx) => Address(),
+      //   EditAddress.routeName:(ctx) => EditAddress(),
+      //   EditPhone.routeName:(BuildContext context, { Object args }) => EditPhone(),
+      //   Case.routeName:(BuildContext context, { Object args }) => Case(),
+      //   UploadCase.routeName:(BuildContext context, { Object args }) => UploadCase(),
+      //   ServerDetail.routeName:(BuildContext context, {arguments} ) =>ServerDetail(serverId:arguments),
+      // },
     );
   }
 }

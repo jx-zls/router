@@ -14,14 +14,13 @@ class _LoginState extends State<Login_PW> {
   GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   String _name;
   String _password;
-  HomeRequest homeRequest = HomeRequest();
 
   _userLogin(context, formk) {
   var _state2 = formk.currentState as FormState;
   if(_state2.validate()){
     _state2.save();
 
-  homeRequest.loginByName(_name, _password, (data) {
+  HomeRequest.loginByName(_name, _password, (data) {
       Perferences().saveUserData(data);
       Navigator.of(context).pushAndRemoveUntil(
           new MaterialPageRoute(builder: (context) => new Root_V()),
